@@ -51,7 +51,6 @@ class ViewController: UIViewController {
     @IBAction func buttonTapped(_ sender: Any) {
         
         buttonCount += 1
-        print( buttonCount )    // output to the console only
         if buttonCount >= BUTTON_MAX {
             view.backgroundColor = UIColor.red
             myLabel.text = "This is really cool"
