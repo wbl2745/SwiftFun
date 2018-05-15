@@ -5,6 +5,9 @@
 //  Created by William Lund on 5/12/18.
 //  Copyright © 2018 Bill Lund. All rights reserved.
 //
+//  Project from Udemy : Swift 4 -- Learn to code with Apple's new language
+//  Introduction to coding for iOS
+//
 
 import UIKit
 
