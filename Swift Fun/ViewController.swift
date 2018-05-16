@@ -20,6 +20,11 @@ import UIKit
 
 class ViewController: UIViewController {
     
+    /*
+     I made this because I was using "NaN" to indicate a text input that
+     was not a number, but "NaN" is in fact a "number" that is not a
+     number. It would be added to other numbers resulting in "NaN".
+    */
     let NaN : String = "Not a number"
     
     /*
@@ -41,47 +46,59 @@ class ViewController: UIViewController {
      UILabel is a type of a label in the storyboard.
     */
     @IBOutlet weak var myLabel : UILabel!
+    
+    // Here are move data fields connected to objects in the storyboard
+    // All you can do is get and put text.
     @IBOutlet weak var topTextField: UITextField!
     @IBOutlet weak var bottomTextField: UITextField!
+    
+    // A switch. Don't know a lot about this.
     @IBOutlet weak var additionSwitch: UISwitch!
     
     // Connected to the button and an action.
     @IBAction func buttonTapped(_ sender: Any) {
         
+        // Capture whether addition or subtraction is chosen.
         let addition : Bool = additionSwitch.isOn
-        if addition {
-            myLabel.text = "Answer: \(Double(topTextField.text!)! + Double(bottomTextField.text!)!)"
-        } else {
-            myLabel.text = "Answer: \(Double(topTextField.text!)! - Double(bottomTextField.text!)!)"
-        }
         
+        // Flag error that would stop the operation
+        var error : Bool = false
         
-        
-        
-        
-        /*
-        if let topStr : String = topTextField.text {
-            if let top : Double = Double(topStr) {
-                if let btmStr : String = bottomTextField.text {
-                    if let btm : Double = Double (btmStr) {
-                        myLabel.text = "Answer: \(top + btm)"
-                    } else {
-                        bottomTextField.text = NaN
-                        myLabel.text = ""
-                    }
-                } else {
-                    bottomTextField.text = "Empty!"
-                    myLabel.text = ""
-                }
+        var top : Double = Double.nan
+        if let _topStr : String = topTextField.text {
+            // It appears that checking the status of the topTextField is
+            // unnecessary since even an empty field doesn't seem to occur
+            // even if the field is empty. Using the debugger it appears
+            // that an empty field returns a zero length string "".
+            if let _top : Double = Double( _topStr ) {
+                top = _top
             } else {
-                topTextField.text = NaN
-                myLabel.text = ""
+                topTextField.text = "Not a number"
+                error = true
             }
         } else {
-            topTextField.text = "Empty!"
-            myLabel.text = ""
+            topTextField.text = "Not a string"
+            error = true
         }
-         */
+        
+        // Bypassing check for whether bottomTextField.text is nil
+        var btm : Double = Double.nan
+        if let _btm : Double = Double(bottomTextField.text!) {
+            btm = _btm
+        } else {
+            bottomTextField.text = "Not a number"
+            error = true
+        }
+        
+        if !error {
+            if addition {
+                myLabel.text = "Answer: \(top + btm)"
+            } else {
+                myLabel.text = "Answer: \(top - btm)"
+            }
+        } else {
+            myLabel.text = "There was an error"
+        }
         
     } // buttonTapped()
     
@@ -92,8 +109,7 @@ class ViewController: UIViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
-    }
+    } // didReceiveMemoryWarning()
 
-
-}
+} // class ViewController
 
