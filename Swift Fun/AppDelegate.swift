@@ -8,6 +8,7 @@
 //  Project from Udemy : Swift 4 -- Learn to code with Apple's new language
 //  Introduction to coding for iOS
 //
+//  A change just for GitKraken
 
 import UIKit
 
