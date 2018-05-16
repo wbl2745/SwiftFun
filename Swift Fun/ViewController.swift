@@ -20,12 +20,7 @@ import UIKit
 
 class ViewController: UIViewController {
     
-    // Number of times you have to push the button to change the label and
-    // background.
-    let BUTTON_MAX : Int = 3
-
-    // count how many times the button has been pressed
-    var buttonCount : Int = 0
+    let NaN : String = "Not a number"
     
     /*
      The following line of code was created by cntl dragging from a label
@@ -46,15 +41,48 @@ class ViewController: UIViewController {
      UILabel is a type of a label in the storyboard.
     */
     @IBOutlet weak var myLabel : UILabel!
+    @IBOutlet weak var topTextField: UITextField!
+    @IBOutlet weak var bottomTextField: UITextField!
+    @IBOutlet weak var additionSwitch: UISwitch!
     
     // Connected to the button and an action.
     @IBAction func buttonTapped(_ sender: Any) {
         
-        buttonCount += 1
-        if buttonCount >= BUTTON_MAX {
-            view.backgroundColor = UIColor.red
-            myLabel.text = "This is really cool"
+        let addition : Bool = additionSwitch.isOn
+        if addition {
+            myLabel.text = "Answer: \(Double(topTextField.text!)! + Double(bottomTextField.text!)!)"
+        } else {
+            myLabel.text = "Answer: \(Double(topTextField.text!)! - Double(bottomTextField.text!)!)"
         }
+        
+        
+        
+        
+        
+        /*
+        if let topStr : String = topTextField.text {
+            if let top : Double = Double(topStr) {
+                if let btmStr : String = bottomTextField.text {
+                    if let btm : Double = Double (btmStr) {
+                        myLabel.text = "Answer: \(top + btm)"
+                    } else {
+                        bottomTextField.text = NaN
+                        myLabel.text = ""
+                    }
+                } else {
+                    bottomTextField.text = "Empty!"
+                    myLabel.text = ""
+                }
+            } else {
+                topTextField.text = NaN
+                myLabel.text = ""
+            }
+        } else {
+            topTextField.text = "Empty!"
+            myLabel.text = ""
+        }
+         */
+        
     } // buttonTapped()
     
     override func viewDidLoad() {
